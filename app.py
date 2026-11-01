@@ -4,6 +4,35 @@
 import os, io, json, time, wave, base64, html as _html, sqlite3, contextlib, warnings
 import numpy as np, pandas as pd, requests, yfinance as yf
 import streamlit as st
+# ===== PROTECTION PAR MOT DE PASSE =====
+
+PASSWORD = "DaxSamuel2026"
+
+if "auth" not in st.session_state:
+    st.session_state.auth = False
+
+if not st.session_state.auth:
+
+    st.title("🔒 Accès privé")
+
+    pwd = st.text_input(
+        "Mot de passe",
+        type="password"
+    )
+
+    if st.button("Connexion"):
+
+        if pwd == PASSWORD:
+            st.session_state.auth = True
+            st.rerun()
+
+        else:
+            st.error("Mot de passe incorrect")
+
+    st.stop()
+
+# ===== FIN PROTECTION =====
+
 warnings.filterwarnings("ignore")
 
 st.set_page_config(page_title="Signaux DAX", page_icon="📈", layout="wide",
